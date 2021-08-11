@@ -6,9 +6,96 @@
 /* FONTS */
 
 @font-face {
-    font-family: impact;
-    src: url(/fonts/Impact/impact.ttf);
+    font-family: 'dosis-med';
+    src: url(/fonts/Dosis/Dosis-Medium.ttf);
 }
+
+@font-face {
+    font-family: 'dosis-reg';
+    src: url(/fonts/Dosis/Dosis-Regular.ttf);
+}
+
+
+/* BASE */
+
+html {
+    font-family: dosis-med;
+}
+
+body {
+    margin: 0;
+}
+
+
+/* HEADER */
+
+.main-header {
+    background-color: #ff7f00;
+    height: 111px;
+    box-shadow: inset 0 -6px #0c0c0c;
+    margin-bottom: 1rem;
+}
+
+.header-layout {
+    align-items: center;
+}
+
+
+/* main nav */
+
+.main-nav a {
+    text-align: center;
+    font-size: 1.5rem;
+    width: 120px;
+    height: 110px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-align: center;
+    filter: drop-shadow(0px 1px 0px #1e1e1e);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: color .4s;
+}
+
+
+/* .main-nav li:not(:first-child) {
+    border-left: none;
+} */
+
+
+/* .main-nav li {
+    border: 2px solid black;
+} */
+
+.main-nav a.active {
+    color: rgb(50, 50, 50);
+    background-color: #ffa600;
+    box-shadow: inset 0 -6px #0c0c0c;
+}
+
+
+/* .main-nav li.clicked {
+    overflow: auto;
+} */
+
+.main-nav>li:hover>a {
+    color: rgb(50, 50, 50);
+    background-color: #ffa600;
+    box-shadow: inset 0 -6px #0c0c0c;
+}
+
+
+/* LAYOUT */
+
+.main-layout {
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+
+/* CANVAS */
 
 canvas {
     display: block;
@@ -25,6 +112,9 @@ canvas {
     display: none;
 }
 
+
+/* GALLERY */
+
 .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -33,20 +123,28 @@ canvas {
 }
 
 
-/* ICONS */
+/* HELPERS */
 
-.fab.fa-facebook-f::before {
-    content: "\f39e";
+
+/* flex helpers */
+
+.flex {
+    display: flex;
 }
 
-.fab.fa-twitter::before {
-    content: "\f099";
+.flex.space-between {
+    justify-content: space-between;
 }
 
-.fab.fa-behance::before {
-    content: "\f1b4";
+.flex.align-center {
+    align-items: center;
 }
 
-.fab.fa-dribbble::before {
-    content: "\f17d";
+
+/* list-helpers */
+
+.clean-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }

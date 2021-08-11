@@ -34,7 +34,7 @@ function onSelectImg(imgId) {
     //Default Prefs
     document.querySelector('.color').value = 'black'
     document.querySelector('.stroke-color').value = '#ffffff'
-    document.querySelector('.font-selector').value = 'Arial'
+    document.querySelector('.font-selector').value = 'Impact'
 
 
     hideGallery()
@@ -104,7 +104,6 @@ function onNewLine() {
 
 
 function onText() {
-    console.log('im here')
     addLine(gInput.value)
     render()
 }

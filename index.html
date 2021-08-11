@@ -11,21 +11,34 @@
 
 <body onload="init()">
 
-    <div class="gallery-container">
-        <h2>Welcome to gallery:</h2>
+    <header class="main-header">
+        <div class="header-layout flex main-layout space-between align-items">
+            <img src="img/LOGO/LOGO.png" alt="Logo" width="238" height="50">
 
-        <div class="gallery">
+            <ul class="main-nav flex clean-list">
+                <li><a href="#" class="active">Gallery</a></li>
+                <li><a href="#">Memes</a></li>
+                <li><a href="#">About me</a></li>
+            </ul>
         </div>
-    </div>
+    </header>
 
+    <main class="main-layout">
+
+        <div class="gallery-container">
+            <div class="gallery">
+            </div>
+        </div>
+    </main>
 
 
 
     <div class="meme-container">
         <select class="font-selector" onchange="onChangeFont(this.value)">
+        <option value="Impact">Impact</option>
+        <option value="monospace">Monospace</option>
         <option value="Arial">Arial</option>
-        <option value="sarif">sarif</option>
-        <option value="san-sarif">san-sarif</option>
+        <option value="sarif">Sarif</option>
     </select>
 
         <button onclick="onDeleteLine()">Delete</button>

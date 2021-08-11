@@ -13,7 +13,7 @@ function setMemeDefault() {
                 align: 'left',
                 color: 'red',
                 strokeColor: 'black',
-                font: 'Arial'
+                font: 'Impact'
             },
             {
                 pos: { x: 50, y: 150 },
@@ -22,7 +22,7 @@ function setMemeDefault() {
                 align: 'left',
                 color: 'blue',
                 strokeColor: 'black',
-                font: 'Arial'
+                font: 'Impact'
             }
         ]
     }
@@ -115,7 +115,7 @@ function makeLine(txt) {
         align: 'left',
         color: 'white',
         strokeColor: 'black',
-        font: 'Arial'
+        font: 'Impact'
     }
 }
 
