@@ -192,3 +192,15 @@ function renderLinePref() {
     document.querySelector('.font-selector').value = currLine.font
     document.querySelector('[name=txt]').value = currLine.txt
 }
+
+
+function aboutMe() {
+    console.log('im here')
+    document.querySelector('.about-me').style.display = 'block'
+    hideGenerator();
+    hideGallery();
+}
+
+function hideAboutMe() {
+    document.querySelector('.about-me').style.display = 'none'
+}

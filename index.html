@@ -16,7 +16,7 @@
             <img src="img/LOGO/LOGO.png" alt="Logo" width="238" height="50">
 
             <ul class="main-nav flex clean-list">
-                <li><a href="#" class="active">Gallery</a></li>
+                <li><a onclick="aboutMe()" href="#" class="active">Gallery</a></li>
                 <li><a href="#">Memes</a></li>
                 <li><a href="#">About me</a></li>
             </ul>
@@ -57,21 +57,45 @@
         <button onclick="onAlignCenter()">Align Center</button>
         <button onclick="onAlignRight()">Align Right</button>
 
-
-
-
         <button onclick="onSwitchLines()">Switch Lines</button>
 
         <button onclick="onNewLine()">New Line</button>
 
-
-
         <canvas id="my-canvas" height="500" width="500"></canvas>
-
-
         <a href="#" onclick="onDownloadCanvas(this)" download="myMeme">Download</a>
         <button onclick="onBackToGal()">Back to Gallery</button>
     </div>
+
+    <div class="about-me">
+        <h1>About me</h1>
+        <img class="img-me" src="img/me/1.jpeg" alt="">
+        <h4>Matan Levi</h4>
+        <p>Full Stack Developer</p>
+        <!-- <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+                <a href="https://github.com/matan3857" target="_blank">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.facebook.com/matan.levi.77" target="_blank">
+                    <i class="fa fa-facebook"></i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a href="https://www.linkedin.com/in/matan-levi-561115199/" target="_blank">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </li>
+        </ul> -->
+    </div>
+
+
+
+    <footer class="footer-container container">
+        <img class="footer-img" src="img/LOGO/LOGO.png" alt="Logo" width="191" height="40">
+        <p>all rights reserved 2021</p>
+    </footer>
 
 
     <script src="js/storage-service.js"></script>

@@ -84,13 +84,14 @@ body {
     color: rgb(50, 50, 50);
     background-color: #ffa600;
     box-shadow: inset 0 -6px #0c0c0c;
+    text-decoration: underline;
 }
 
 
 /* LAYOUT */
 
 .main-layout {
-    max-width: 980px;
+    max-width: 1040px;
     margin: 0 auto;
 }
 
@@ -119,7 +120,36 @@ canvas {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
-    max-width: 980px;
+}
+
+
+/* FOOTER */
+
+.footer-container {
+    margin-top: 1rem;
+    text-align: center;
+    height: 170px;
+    background-color: #ff7f00;
+}
+
+.footer-img {
+    margin-top: 20px;
+}
+
+.footer-container p {
+    font-size: 0.8125rem;
+    color: #d4d4d4;
+}
+
+
+/* ABOUT ME */
+
+.about-me {
+    display: none;
+}
+
+.img-me {
+    border-radius: 50%;
 }
 
 
