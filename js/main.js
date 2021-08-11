@@ -194,8 +194,7 @@ function renderLinePref() {
 }
 
 
-function aboutMe() {
-    console.log('im here')
+function onAboutMe() {
     document.querySelector('.about-me').style.display = 'block'
     hideGenerator();
     hideGallery();
@@ -203,4 +202,10 @@ function aboutMe() {
 
 function hideAboutMe() {
     document.querySelector('.about-me').style.display = 'none'
+}
+
+function onShowGallery() {
+    hideAboutMe()
+    hideGenerator()
+    showGallery()
 }
