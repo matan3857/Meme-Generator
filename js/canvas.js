@@ -51,6 +51,23 @@ function switchLines() {
 
 }
 
+function alignLeft() {
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = 0;
+}
+
+function alignCenter() {
+    let textLength = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = (gCanvas.width - textLength) / 2;
+}
+
+function alignRight() {
+    let textLength = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+    console.log('textLength', textLength)
+    let pos = gCanvas.width - textLength
+    gMeme.lines[gMeme.selectedLineIdx].pos.x = pos;
+
+}
+
 
 function updateMemeImg(imgId) {
     gMeme.selectedImgId = imgId
@@ -86,6 +103,7 @@ function addNewLine(txt) {
 }
 
 function addLine(txt) {
+    if (!gMeme.lines.length) return
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 

@@ -1,5 +1,8 @@
+'use strict'
+
 var gCanvas;
 var gCtx;
+var gInput
 
 
 function init() {
@@ -7,8 +10,8 @@ function init() {
     // setDefaultProp();
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
-    input = document.querySelector('[name=txt]')
-    input.addEventListener('input', onText)
+    gInput = document.querySelector('[name=txt]')
+    gInput.addEventListener('input', onText)
     renderGallery()
 }
 
@@ -73,9 +76,24 @@ function drawText(txt, x, y, lineIdx) {
     gCtx.save();
     if (lineIdx === currLine) {
         let pos = getCurrLinePos(lineIdx)
-        textLength = gCtx.measureText(txt).width
+        let textLength = gCtx.measureText(txt).width
         drawRect(pos.x, pos.y, pos.size, textLength)
     }
+}
+
+function onAlignLeft() {
+    alignLeft()
+    render()
+}
+
+function onAlignCenter() {
+    alignCenter()
+    render()
+}
+
+function onAlignRight() {
+    alignRight()
+    render()
 }
 
 function onNewLine() {
@@ -86,7 +104,8 @@ function onNewLine() {
 
 
 function onText() {
-    addLine(input.value)
+    console.log('im here')
+    addLine(gInput.value)
     render()
 }
 
