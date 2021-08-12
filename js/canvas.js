@@ -1,6 +1,7 @@
 'use strict'
 
 var gMeme
+var gMemes = []
 
 function setMemeDefault() {
     gMeme = {
@@ -159,4 +160,8 @@ function setColorStroke(color) {
 
 function changeFont(newFont) {
     gMeme.lines[gMeme.selectedLineIdx].font = newFont
+}
+
+function saveMeme() {
+    gMemes.push(gMeme)
 }

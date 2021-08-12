@@ -15,6 +15,11 @@
     src: url(/fonts/Dosis/Dosis-Regular.ttf);
 }
 
+@font-face {
+    font-family: 'montserrat';
+    src: url(/fonts/Montserrat/Montserrat-Regular.ttf);
+}
+
 
 /* BASE */
 
@@ -24,7 +29,7 @@ html {
 
 body {
     margin: 0;
-    background-color: lavenderblush;
+    /* background-color: lavenderblush; */
 }
 
 
@@ -123,10 +128,27 @@ body {
 }
 
 .sort-btns {
-    font-family: Impact;
+    font-family: montserrat;
     border: none;
     text-decoration: none;
     background-color: #ffffff;
+}
+
+.sort-btns:hover {
+    color: #ff7f00;
+}
+
+.sort-btn {
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.sort-txt {
+    border: none;
+    border-bottom: 2px solid #1e1e1e;
+    padding: 5px 10px;
+    outline: none;
 }
 
 
@@ -206,6 +228,13 @@ canvas {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     justify-items: center;
     margin: 0 auto;
+}
+
+
+/* SAVED MEMES GALLERY */
+
+.my-memes-gallery {
+    display: none;
 }
 
 

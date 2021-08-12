@@ -26,6 +26,7 @@ function renderGallery(imgs = '') {
         `
     })
     document.querySelector('.gallery').innerHTML = strHtmls.join('')
+    onRenderKeywords()
 }
 
 function onSortImages(searchWord = '') {
@@ -39,19 +40,21 @@ function onSortImages(searchWord = '') {
 }
 
 
-function onRenderKeywords() {
+function onRenderKeywords(isMore = false) {
     var keywords = getKeywords()
     var strHtml = ''
-        // var idx = 0
+    var idx = 0
     for (var keyword in keywords) {
         var fontSize = 16 + keywords[keyword]
         if (fontSize > 60) fontSize = 60;
         strHtml += `<button onclick="onSortImages('${keyword}')" class="sort-btns ${keyword} pointer" style="border: none;text-decoration: none;font-size:${fontSize}px">${keyword}</button>`
-            // idx++
-            // if (idx === 5) {
-            //     strHtml += `<button onclick="onMore()" class="search-btn" data-trans="more" style="text-decoration: underline;">more...</button>
-            //                 <div class="search-more">`
-            // }
+        idx++
+        if (isMore) continue
+        if (idx === 5) {
+            strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">more...</button>
+                            <div class="search-more">`
+            break;
+        }
     }
     strHtml += `</div>`
     document.querySelector('.btns-search').innerHTML = strHtml
@@ -110,6 +113,10 @@ function drawText(txt, x, y, lineIdx) {
         let textLength = gCtx.measureText(txt).width
         drawRect(pos.x, pos.y, pos.size, textLength)
     }
+}
+
+function onMore() {
+    onRenderKeywords(true)
 }
 
 function onAlignLeft() {
@@ -189,6 +196,11 @@ function onChangeFont(font) {
     render()
 }
 
+function onSaveMeme() {
+    saveMeme()
+    alert('Saved')
+}
+
 
 function render() {
     clearCanvas()
@@ -229,18 +241,58 @@ function renderLinePref() {
 
 
 function onAboutMe() {
-    document.querySelector('.about-me').style.display = 'block'
-    hideGenerator();
-    hideGallery();
+    removeActive()
+    document.querySelector('.about-me-btn').classList.add('active')
+
+    hideGenerator()
+    hideGallery()
+    hideMyMemes()
+    showAboutMe()
+}
+
+
+
+function onShowGallery() {
+    removeActive()
+    document.querySelector('.gallery-btn').classList.add('active')
+    renderGallery()
+
+    hideAboutMe()
+    hideGenerator()
+    hideMyMemes()
+    showGallery()
+}
+
+function onShowMemes() {
+    removeActive()
+    document.querySelector('.memes-btn').classList.add('active')
+
+    hideAboutMe()
+    hideGenerator()
+    hideGallery()
+    showMyMemes()
+}
+
+function hideMyMemes() {
+    document.querySelector('.my-memes-gallery').style.display = 'none'
 }
 
 function hideAboutMe() {
     document.querySelector('.about-me').style.display = 'none'
 }
 
-function onShowGallery() {
-    renderGallery()
-    hideAboutMe()
-    hideGenerator()
-    showGallery()
+function showMyMemes() {
+    document.querySelector('.my-memes-gallery').style.display = 'block'
+}
+
+function showAboutMe() {
+    document.querySelector('.about-me').style.display = 'block'
+
+}
+
+function removeActive() {
+    var elems = document.querySelectorAll(".active");
+    [].forEach.call(elems, function(el) {
+        el.classList.remove("active");
+    });
 }

@@ -17,7 +17,7 @@
 
             <ul class="main-nav flex clean-list">
                 <li><a class="gallery-btn active" onclick="onShowGallery()" href="#">Gallery</a></li>
-                <li><a class="memes-btn" href="#">Memes</a></li>
+                <li><a class="memes-btn" onclick="onShowMemes()" href="#">Memes</a></li>
                 <li><a class="about-me-btn" onclick="onAboutMe()" href="#">About me</a></li>
             </ul>
         </div>
@@ -34,12 +34,15 @@
         <div class="btns-search">
         </div>
 
-
-
     </section>
 
-    <main class="main-layout">
+    <!-- Render here Saved Memes -->
+    <div class="my-memes-gallery">
+        <h1>Hello my memes</h1>
+    </div>
 
+    <!-- Render here all images -->
+    <main class="main-layout">
         <div class="gallery-container">
             <div class="gallery">
             </div>
@@ -53,7 +56,6 @@
             <canvas id="my-canvas" height="500" width="500"></canvas>
 
             <div class="meme-control">
-
                 <select class="font-selector" onchange="onChangeFont(this.value)">
         <option value="Impact">Impact</option>
         <option value="monospace">Monospace</option>

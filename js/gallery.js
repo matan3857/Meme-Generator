@@ -1,12 +1,12 @@
 'use strict'
-var gKeywords = { 'happy': 23, 'baby': 11, 'funny': 5, 'dog': 4 }
+var gKeywords = { 'happy': 25, 'baby': 13, 'funny': 7, 'dog': 6, 'crazy': 12, 'kiss': 3, 'cat': 3, 'putin': 2 }
 
 var gImages = [
     { id: 1, url: 'img/1.jpg', keywords: ['trump'] },
-    { id: 2, url: 'img/2.jpg', keywords: ['puppies,dog'] },
+    { id: 2, url: 'img/2.jpg', keywords: ['dog'] },
     { id: 3, url: 'img/3.jpg', keywords: ['dog', 'baby', 'sleep', 'funny'] },
     { id: 4, url: 'img/4.jpg', keywords: ['cat'] },
-    { id: 5, url: 'img/5.jpg', keywords: ['baby', 'yes', 'yay', 'happy'] },
+    { id: 5, url: 'img/5.jpg', keywords: ['baby', 'happy'] },
     { id: 6, url: 'img/6.jpg', keywords: ['funny'] },
     { id: 7, url: 'img/7.jpg', keywords: ['baby', 'funny'] },
     { id: 8, url: 'img/8.jpg', keywords: ['funny', 'happy'] },
@@ -45,15 +45,19 @@ function addSearchWord(searchWord) {
         else gKeywords[searchWord] = 1
 }
 
-
-
-
 function hideGallery() {
-    document.querySelector('.gallery').style.display = 'none'
+    document.querySelector('.gallery-container').style.display = 'none'
+    document.querySelector('.sort-container').style.display = 'none'
+}
+
+function hideGenerator() {
+    document.querySelector('.meme-container').style.display = 'none'
 }
 
 function showGallery() {
-    document.querySelector('.gallery').style.display = 'block'
+    document.querySelector('.gallery-container').style.display = 'block'
+    document.querySelector('.sort-container').style.display = 'flex'
+
 }
 
 function showGenerator() {
@@ -61,62 +65,9 @@ function showGenerator() {
     document.querySelector('.meme-container').style.display = 'block'
 }
 
-function hideGenerator() {
-    document.querySelector('.meme-container').style.display = 'none'
-}
-
-
-
-
 function getImgById(imgId) {
     var img = gImages.find(function(img) {
         return imgId === img.id
     })
     return img
 }
-
-
-
-
-
-
-
-// const KEY_IMG = 'currImg';
-
-// var gImages = [{ id: makeId(), url: 'img/1.jpg' },
-//     { id: makeId(), url: 'img/2.jpg' },
-//     { id: makeId(), url: 'img/3.jpg' },
-//     { id: makeId(), url: 'img/4.jpg' },
-//     { id: makeId(), url: 'img/5.jpg' },
-//     { id: makeId(), url: 'img/6.jpg' }
-// ];
-
-// var gImgName
-
-
-
-
-
-// function getImgName() {
-//     return gImgName
-// }
-
-// function onSelectImg(imgId) {
-//     saveCurrImg(imgId);
-//     hideGallery();
-//     setDefaultProp();
-//     renderCanvas();
-//     showGenerator();
-// }
-
-
-
-
-// function saveCurrImg(imgId) {
-//     saveToStorage(KEY_IMG, imgId);
-// }
-
-
-// function getImgs() {
-//     return gImages
-// }
