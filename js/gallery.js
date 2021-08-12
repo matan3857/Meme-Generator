@@ -33,10 +33,10 @@ function getKeywords() {
 
 function getImgsForDisplay(searchWord) {
     let lowerCaseWord = searchWord.toLowerCase()
-    addSearchWord(lowerCaseWord);
     let imgsForDisplay = gImages.filter(function(img) {
         return img.keywords.includes(lowerCaseWord)
     })
+    if (imgsForDisplay.length) addSearchWord(lowerCaseWord);
     return imgsForDisplay
 }
 

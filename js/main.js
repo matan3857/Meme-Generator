@@ -3,6 +3,8 @@
 var gCanvas;
 var gCtx;
 var gInput
+var gIsMore = false
+
 
 
 function init() {
@@ -33,14 +35,15 @@ function onSortImages(searchWord = '') {
     if (!searchWord) searchWord = document.querySelector('[name=sort-txt]').value
     if (!searchWord) return
     let imgsForDisplay = getImgsForDisplay(searchWord)
-    renderGallery(imgsForDisplay)
     document.querySelector('.sort-txt').value = ''
+    renderGallery(imgsForDisplay)
     if (!imgsForDisplay.length) return
     onRenderKeywords()
 }
 
 
 function onRenderKeywords(isMore = false) {
+    console.log(isMore)
     var keywords = getKeywords()
     var strHtml = ''
     var idx = 0
@@ -51,14 +54,22 @@ function onRenderKeywords(isMore = false) {
         idx++
         if (isMore) continue
         if (idx === 5) {
-            strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">more...</button>
-                            <div class="search-more">`
+            // strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">more...</button>
+            // <div class="search-more">`
             break;
         }
+
     }
-    strHtml += `</div>`
+
+    strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">`
+
+    if (!isMore) strHtml += `more...</button><div class="search-more"></div>`
+    else strHtml += `less...</button><div class="search-more"></div>`
+        // strHtml += `</div>`
     document.querySelector('.btns-search').innerHTML = strHtml
 }
+
+
 
 function onSelectImg(imgId) {
     setMemeDefault()
@@ -116,7 +127,8 @@ function drawText(txt, x, y, lineIdx) {
 }
 
 function onMore() {
-    onRenderKeywords(true)
+    gIsMore = !gIsMore
+    onRenderKeywords(gIsMore)
 }
 
 function onAlignLeft() {
@@ -295,4 +307,9 @@ function removeActive() {
     [].forEach.call(elems, function(el) {
         el.classList.remove("active");
     });
+}
+
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open');
 }
