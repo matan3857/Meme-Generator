@@ -5,26 +5,26 @@ var gMemes = []
 
 function setMemeDefault() {
     gMeme = {
-        // selectedImgId: 0,
         selectedLineIdx: 0,
-        lines: [{
-                pos: { x: 50, y: 50 },
-                txt: 'I never eat Falafel',
-                size: 20,
-                align: 'left',
-                color: '#FF1010',
-                strokeColor: '#101010',
-                font: 'Impact'
-            },
-            {
-                pos: { x: 50, y: 150 },
-                txt: 'I never eat Shawarma',
-                size: 50,
-                align: 'left',
-                color: '#1010FF',
-                strokeColor: '#101010',
-                font: 'Impact'
-            }
+        lines: [
+            // {
+            //     pos: { x: 50, y: 50 },
+            //     txt: 'I never eat Falafel',
+            //     size: 20,
+            //     align: 'left',
+            //     color: '#FF1010',
+            //     strokeColor: '#101010',
+            //     font: 'Impact'
+            // },
+            // {
+            //     pos: { x: 50, y: 150 },
+            //     txt: 'I never eat Shawarma',
+            //     size: 50,
+            //     align: 'left',
+            //     color: '#1010FF',
+            //     strokeColor: '#101010',
+            //     font: 'Impact'
+            // }
         ]
     }
 }

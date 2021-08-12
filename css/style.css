@@ -367,4 +367,17 @@ canvas {
         opacity: 1;
         pointer-events: auto;
     }
+    .generator {
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .sort-container {
+        flex-direction: column;
+    }
+    .flex {
+        align-items: center;
+    }
+    .canvas-cls {
+        margin-bottom: 1rem;
+    }
 }

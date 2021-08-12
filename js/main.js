@@ -1,6 +1,7 @@
 'use strict'
 
 var gCanvas;
+var gCanvasWidth
 var gCtx;
 var gInput
 var gIsMore = false
@@ -8,21 +9,33 @@ var gIsMore = false
 
 
 function init() {
-    // renderGallery()
-    // setDefaultProp();
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
     gInput = document.querySelector('[name=txt]')
     gInput.addEventListener('input', onText)
     renderGallery()
     onRenderKeywords()
+
+    gCanvasWidth = gCanvas.width
+    window.addEventListener('resize', (ev) => {
+        resizeCanvas()
+        render()
+    })
+}
+
+function resizeCanvas() {
+    const elContainer = document.querySelector('.meme-container');
+    let minSize = Math.min(elContainer.offsetWidth, elContainer.offsetHeight)
+    if (elContainer.offsetWidth > gCanvasWidth) return
+    gCanvas.width = minSize;
+    gCanvas.height = minSize;
 }
 
 function renderGallery(imgs = '') {
     if (!imgs) {
         imgs = getImgs()
     }
-    var strHtmls = imgs.map(function(img) {
+    let strHtmls = imgs.map(function(img) {
         return `
         <img onclick="onSelectImg('${img.id}')" class="img-meme" src="${img.url}" alt="" width="250" height="250" />
         `
@@ -43,29 +56,24 @@ function onSortImages(searchWord = '') {
 
 
 function onRenderKeywords(isMore = false) {
-    console.log(isMore)
-    var keywords = getKeywords()
-    var strHtml = ''
-    var idx = 0
-    for (var keyword in keywords) {
-        var fontSize = 16 + keywords[keyword]
+    let keywords = getKeywords()
+    let strHtml = ''
+    let idx = 0
+    for (let keyword in keywords) {
+        let fontSize = 16 + keywords[keyword]
         if (fontSize > 60) fontSize = 60;
         strHtml += `<button onclick="onSortImages('${keyword}')" class="sort-btns ${keyword} pointer" style="border: none;text-decoration: none;font-size:${fontSize}px">${keyword}</button>`
         idx++
         if (isMore) continue
         if (idx === 5) {
-            // strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">more...</button>
-            // <div class="search-more">`
             break;
         }
-
     }
 
     strHtml += `<button onclick="onMore()" class="sort-btns pointer" style="text-decoration: underline;">`
 
     if (!isMore) strHtml += `more...</button><div class="search-more"></div>`
     else strHtml += `less...</button><div class="search-more"></div>`
-        // strHtml += `</div>`
     document.querySelector('.btns-search').innerHTML = strHtml
 }
 
@@ -88,7 +96,7 @@ function onSelectImg(imgId) {
 
 
 function renderCanvas() {
-    var img = new Image()
+    let img = new Image()
     let imgId = getImgId();
     img.src = getImgById(+imgId).url
     img.onload = () => {

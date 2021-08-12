@@ -66,7 +66,7 @@ function showGenerator() {
 }
 
 function getImgById(imgId) {
-    var img = gImages.find(function(img) {
+    const img = gImages.find(function(img) {
         return imgId === img.id
     })
     return img
