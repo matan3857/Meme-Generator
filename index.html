@@ -13,7 +13,7 @@
 
     <header class="main-header">
         <div class="header-layout flex main-layout space-between align-items">
-            <img src="img/LOGO/LOGO.png" alt="Logo" width="238" height="50">
+            <img class="header-img" onclick="onShowGallery()" src="img/LOGO/LOGO.png" alt="Logo" width="238" height="50">
 
             <ul class="main-nav flex clean-list">
                 <li><a class="gallery-btn active" onclick="onShowGallery()" href="#">Gallery</a></li>
@@ -22,6 +22,21 @@
             </ul>
         </div>
     </header>
+
+    <section class="sort-container main-layout flex space-between">
+        <div class="click-search flex space-between">
+            <input type="text" class="sort-txt" name="sort-txt" placeholder="Enter search word" />
+            <button class="sort-btn pointer" onclick="onSortImages()"><img src="img/ICONS/search-icon.png"/></button>
+        </div>
+
+
+        <!-- Render here popular search -->
+        <div class="btns-search">
+        </div>
+
+
+
+    </section>
 
     <main class="main-layout">
 
@@ -50,8 +65,15 @@
                 <button class="new-line-btn" onclick="onNewLine()">New Line</button>
                 <input type="text" class="input-txt" name="txt" placeholder="Enter Text" />
                 <button onclick="onSwitchLines()"><img src="img/ICONS/up-and-down-opposite-double-arrows-side-by-side.png"/></button>
-                <h5>Fill</h5><input class="color" value="black" type="color" onchange="onSetColorFill(this.value)" />
-                <h5>Stroke</h5><input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" />
+                <h5>Fill Color</h5>
+                <button><img src="img/ICONS/paint-board-and-brush.png"/>
+                    <input class="color" value="black" type="color" onchange="onSetColorFill(this.value)" /></button>
+                <!-- <input class="color" value="black" type="color" onchange="onSetColorFill(this.value)" /> -->
+                <h5>Stroke Color</h5>
+                <!-- <input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" /> -->
+
+                <button><img src="img/ICONS/text stroke.png"/>
+                    <input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" /></button>
                 <button onclick="onUp()">↑</button>
                 <button onclick="onDown()">↓</button>
                 <button onclick="onRight()">→</button>
@@ -63,8 +85,9 @@
                 <button onclick="onMinus()"><img src="img/ICONS/decrease font - icon.png"/></button>
 
 
-                <a href="#" onclick="onDownloadCanvas(this)" download="myMeme">Download</a>
+                <a class="download-btn" href="#" onclick="onDownloadCanvas(this)" download="myMeme">Download</a>
                 <button onclick="onSaveMeme()">Save</button>
+                <!-- <button onclick="onSaveMeme()"><img src="img/ICONS/save-solid.svg"/></button> -->
                 <button onclick="onBackToGal()">Back to Gallery</button>
             </div>
         </div>

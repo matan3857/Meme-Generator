@@ -24,6 +24,7 @@ html {
 
 body {
     margin: 0;
+    background-color: lavenderblush;
 }
 
 
@@ -38,6 +39,10 @@ body {
 
 .header-layout {
     align-items: center;
+}
+
+.header-img {
+    cursor: pointer;
 }
 
 
@@ -96,6 +101,35 @@ body {
 }
 
 
+/* SEARCH CONTAINER */
+
+.sort-container {
+    background-color: white;
+    margin-bottom: 1rem;
+}
+
+
+/* .sort-container>button {
+    cursor: pointer;
+}
+
+.sort-container>.click-search>button {
+    cursor: pointer;
+} */
+
+.sort-container>.click-search>button>img {
+    height: 25px;
+    width: 25px;
+}
+
+.sort-btns {
+    font-family: Impact;
+    border: none;
+    text-decoration: none;
+    background-color: #ffffff;
+}
+
+
 /* CANVAS */
 
 canvas {
@@ -120,12 +154,27 @@ canvas {
 .meme-control {
     display: grid;
     grid-template-columns: repeat(4, 60px);
-    grid-auto-rows: repeat(5, 50px);
+    grid-auto-rows: repeat(6, 1fr);
     grid-gap: 10px;
     background-color: #e3e3e3;
     padding: 15px;
     border: 1px solid black;
 }
+
+.meme-control>* {
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.meme-control>button:hover {
+    background-color: #c2bebe;
+}
+
+
+/* .main-nav>li:hover>a {
+    color: #58c93a;
+    box-shadow: inset 0 -6px #58c93a;
+} */
 
 .font-selector {
     grid-column: 1/3
@@ -136,7 +185,15 @@ canvas {
     grid-column: 1/4;
 }
 
-.new-line-btn {}
+.download-btn {
+    align-self: center;
+    /* color: white;
+    height: 40px;
+    border-radius: 6px;
+    background-color: #ff7f00;
+    text-align: center;
+    padding: 10px; */
+}
 
 
 /* GALLERY */
@@ -208,6 +265,13 @@ canvas {
 
 .flex.align-center {
     align-items: center;
+}
+
+
+/* btn-helpers */
+
+.pointer {
+    cursor: pointer;
 }
 
 

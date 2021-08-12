@@ -11,8 +11,8 @@ function setMemeDefault() {
                 txt: 'I never eat Falafel',
                 size: 20,
                 align: 'left',
-                color: 'red',
-                strokeColor: 'black',
+                color: '#FF1010',
+                strokeColor: '#101010',
                 font: 'Impact'
             },
             {
@@ -20,8 +20,8 @@ function setMemeDefault() {
                 txt: 'I never eat Shawarma',
                 size: 50,
                 align: 'left',
-                color: 'blue',
-                strokeColor: 'black',
+                color: '#1010FF',
+                strokeColor: '#101010',
                 font: 'Impact'
             }
         ]

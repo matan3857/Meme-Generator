@@ -13,10 +13,13 @@ function init() {
     gInput = document.querySelector('[name=txt]')
     gInput.addEventListener('input', onText)
     renderGallery()
+    onRenderKeywords()
 }
 
-function renderGallery() {
-    var imgs = getImgs()
+function renderGallery(imgs = '') {
+    if (!imgs) {
+        imgs = getImgs()
+    }
     var strHtmls = imgs.map(function(img) {
         return `
         <img onclick="onSelectImg('${img.id}')" class="img-meme" src="${img.url}" alt="" width="250" height="250" />
@@ -25,6 +28,34 @@ function renderGallery() {
     document.querySelector('.gallery').innerHTML = strHtmls.join('')
 }
 
+function onSortImages(searchWord = '') {
+    if (!searchWord) searchWord = document.querySelector('[name=sort-txt]').value
+    if (!searchWord) return
+    let imgsForDisplay = getImgsForDisplay(searchWord)
+    renderGallery(imgsForDisplay)
+    document.querySelector('.sort-txt').value = ''
+    if (!imgsForDisplay.length) return
+    onRenderKeywords()
+}
+
+
+function onRenderKeywords() {
+    var keywords = getKeywords()
+    var strHtml = ''
+        // var idx = 0
+    for (var keyword in keywords) {
+        var fontSize = 16 + keywords[keyword]
+        if (fontSize > 60) fontSize = 60;
+        strHtml += `<button onclick="onSortImages('${keyword}')" class="sort-btns ${keyword} pointer" style="border: none;text-decoration: none;font-size:${fontSize}px">${keyword}</button>`
+            // idx++
+            // if (idx === 5) {
+            //     strHtml += `<button onclick="onMore()" class="search-btn" data-trans="more" style="text-decoration: underline;">more...</button>
+            //                 <div class="search-more">`
+            // }
+    }
+    strHtml += `</div>`
+    document.querySelector('.btns-search').innerHTML = strHtml
+}
 
 function onSelectImg(imgId) {
     setMemeDefault()
@@ -187,8 +218,11 @@ function onDownloadCanvas(elLink) {
 
 function renderLinePref() {
     let currLine = getCurrLine()
-        // document.querySelector('.color').value = currLine.color
-        // document.querySelector('.stroke-color').value = currLine.strokeColor
+    console.log('currLine.color', currLine.color)
+
+
+    document.querySelector('.color').value = currLine.color
+    document.querySelector('.stroke-color').value = currLine.strokeColor
     document.querySelector('.font-selector').value = currLine.font
     document.querySelector('[name=txt]').value = currLine.txt
 }
@@ -205,6 +239,7 @@ function hideAboutMe() {
 }
 
 function onShowGallery() {
+    renderGallery()
     hideAboutMe()
     hideGenerator()
     showGallery()
