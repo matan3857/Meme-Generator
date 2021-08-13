@@ -17,9 +17,15 @@ function init() {
     onRenderKeywords()
 
     gCanvasWidth = gCanvas.width
+    addListeners()
     window.addEventListener('resize', () => {
         resizeCanvas()
     })
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
 }
 
 function resizeCanvas() {
@@ -116,7 +122,7 @@ function renderCanvas() {
 function drawRect(x, y, txtHeight, textLength) {
     gCtx.beginPath()
     gCtx.rect(x, y - txtHeight * 0.9, textLength * 1.05, txtHeight)
-    gCtx.strokeStyle = 'black'
+    gCtx.strokeStyle = '#000000'
     gCtx.stroke()
 }
 
@@ -254,9 +260,6 @@ function onDownloadCanvas(elLink) {
 
 function renderLinePref() {
     let currLine = getCurrLine()
-    console.log('currLine.color', currLine.color)
-
-
     document.querySelector('.color').value = currLine.color
     document.querySelector('.stroke-color').value = currLine.strokeColor
     document.querySelector('.font-selector').value = currLine.font

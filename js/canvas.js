@@ -2,6 +2,9 @@
 
 var gMeme
 var gMemes = []
+var gStartPos
+const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+
 
 function setMemeDefault() {
     gMeme = {
@@ -114,9 +117,10 @@ function makeLine(txt) {
         txt,
         size: 40,
         align: 'left',
-        color: 'white',
-        strokeColor: 'black',
-        font: 'Impact'
+        color: '#FFFFFF',
+        strokeColor: '#000000',
+        font: 'Impact',
+        isDrag: false
     }
 }
 
@@ -164,4 +168,80 @@ function changeFont(newFont) {
 
 function saveMeme() {
     gMemes.push(gMeme)
+}
+
+function addMouseListeners() {
+    gCanvas.addEventListener('mousemove', onGrabMove)
+    gCanvas.addEventListener('mousedown', onGrabDown)
+    gCanvas.addEventListener('mouseup', onGrabUp)
+}
+
+function addTouchListeners() {
+    gCanvas.addEventListener('touchmove', onGrabMove)
+    gCanvas.addEventListener('touchstart', onGrabDown)
+    gCanvas.addEventListener('touchend', onGrabUp)
+}
+
+function onGrabDown(ev) {
+    const pos = getEvPos(ev)
+    if (!isLineClicked(pos)) return
+    setLineDrag(true)
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+
+function isLineClicked(clickedPos) {
+    const { pos } = gMeme.lines[gMeme.selectedLineIdx]
+    const distance = Math.sqrt((pos.x - clickedPos.x) ** 2 + (pos.y - clickedPos.y) ** 2)
+    return distance <= gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
+}
+
+
+function setLineDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+}
+
+function onGrabMove(ev) {
+    const line = getCurrLine();
+    if (!line) return
+    if (line.isDrag) {
+        const pos = getEvPos(ev)
+        const dx = pos.x - line.pos.x
+        const dy = pos.y - line.pos.y
+        moveCurrLine(dx, dy)
+        gStartPos = pos
+        renderCanvas()
+    }
+}
+
+function moveMeme(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+
+}
+
+function onGrabUp() {
+    setLineDrag(false)
+    document.body.style.cursor = 'grab'
+}
+
+function moveCurrLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+}
+
+function getEvPos(ev) {
+    let pos = {
+        x: ev.offsetX,
+        y: ev.offsetY
+    }
+    if (gTouchEvs.includes(ev.type)) {
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+        }
+    }
+    return pos
 }

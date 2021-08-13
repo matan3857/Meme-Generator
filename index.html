@@ -71,14 +71,8 @@
         <option value="Arial">Arial</option>
         <option value="sarif">Sarif</option>
     </select>
-
-                <!-- <h5>Fill Color</h5> -->
                 <button class="meme-btns color-btn"><img src="img/ICONS/paint-board-and-brush.png"/>
-                    <input class="color" value="black" type="color" onchange="onSetColorFill(this.value)" /></button>
-                <!-- <input class="color" value="black" type="color" onchange="onSetColorFill(this.value)" /> -->
-                <!-- <h5>Stroke Color</h5> -->
-                <!-- <input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" /> -->
-
+                    <input class="color" value="#000000" type="color" onchange="onSetColorFill(this.value)" /></button>
                 <button class="meme-btns stroke-btn"><img src="img/ICONS/text stroke.png"/>
                     <input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" /></button>
                 <button class="meme-btns btns-move btn-up" onclick="onUp()">↑</button>
@@ -93,7 +87,6 @@
 
 
                 <a class="meme-btns download-btn" href="#" onclick="onDownloadCanvas(this)" download="myMeme">Download</a>
-                <!-- <button onclick="onSaveMeme()">Save</button> -->
                 <button class="meme-btns save-btn" onclick="onSaveMeme()"><img src="img/ICONS/save-solid.svg"/></button>
                 <a class="meme-btns share-btn" href="#" onclick="onDownloadCanvas(this)" download="myMeme">Share on FB</a>
 
