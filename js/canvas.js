@@ -110,7 +110,7 @@ function addLine(txt) {
 
 function makeLine(txt) {
     return {
-        pos: { x: 50, y: 250 },
+        pos: { x: 175, y: 250 },
         txt,
         size: 40,
         align: 'left',

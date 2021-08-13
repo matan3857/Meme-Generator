@@ -56,7 +56,7 @@ function hideGenerator() {
 
 function showGallery() {
     document.querySelector('.gallery-container').style.display = 'block'
-    document.querySelector('.sort-container').style.display = 'flex'
+    document.querySelector('.sort-container').style.display = 'block'
 
 }
 

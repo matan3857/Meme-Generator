@@ -1,13 +1,13 @@
 'use strict';
 
-// function saveToStorage(key, val) {
-//     localStorage.setItem(key, JSON.stringify(val))
-// }
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
 
-// function loadFromStorage(key) {
-//     var val = localStorage.getItem(key)
-//     return JSON.parse(val)
-// }
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
+}
 
 // function makeId(length = 3) {
 //     var txt = '';

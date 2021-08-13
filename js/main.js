@@ -17,18 +17,22 @@ function init() {
     onRenderKeywords()
 
     gCanvasWidth = gCanvas.width
-    window.addEventListener('resize', (ev) => {
+    window.addEventListener('resize', () => {
         resizeCanvas()
-        render()
     })
 }
 
 function resizeCanvas() {
     const elContainer = document.querySelector('.meme-container');
+
+    let dis = (getComputedStyle(elContainer, null).display)
+    if (dis === 'none') return
+
     let minSize = Math.min(elContainer.offsetWidth, elContainer.offsetHeight)
     if (elContainer.offsetWidth > gCanvasWidth) return
     gCanvas.width = minSize;
     gCanvas.height = minSize;
+    render()
 }
 
 function renderGallery(imgs = '') {
