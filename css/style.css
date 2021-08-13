@@ -320,6 +320,10 @@ canvas {
 
 /* GALLERY */
 
+.gallery-container {
+    margin-top: 1rem;
+}
+
 .gallery {
     display: grid;
     /* grid-template-columns: repeat(4, 1fr); */

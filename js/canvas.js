@@ -1,5 +1,5 @@
 'use strict'
-
+const KEY = 'memeDB';
 var gMeme
 var gMemes = []
 var gStartPos
@@ -8,6 +8,7 @@ const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 function setMemeDefault() {
     gMeme = {
+        id: makeId(),
         selectedLineIdx: 0,
         lines: [
             // {
@@ -165,11 +166,18 @@ function setColorStroke(color) {
 function changeFont(newFont) {
     gMeme.lines[gMeme.selectedLineIdx].font = newFont
 }
-
+//For my memes saving
 function saveMeme() {
-    gMemes.push(gMeme)
+    gMeme.img = gCanvas.toDataURL()
+    gMemes.push(JSON.parse(JSON.stringify(gMeme)))
+    _saveMemesToStorage()
 }
 
+function _saveMemesToStorage() {
+    saveToStorage(KEY, gMemes)
+}
+
+//Grab Lines on Canvas functions
 function addMouseListeners() {
     gCanvas.addEventListener('mousemove', onGrabMove)
     gCanvas.addEventListener('mousedown', onGrabDown)

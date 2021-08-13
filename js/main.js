@@ -54,6 +54,18 @@ function renderGallery(imgs = '') {
     onRenderKeywords()
 }
 
+function renderMemes() {
+    var memes = loadFromStorage(KEY)
+    console.log(memes)
+
+    let strHtmls = memes.map(function(meme) {
+        return `
+        <img onclick="onSelectMeme('${meme.id}')" class="img-meme" src="${meme.img}" alt="" width="250" height="250" />
+        `
+    })
+    document.querySelector('.gallery').innerHTML = strHtmls.join('')
+}
+
 function onSortImages(searchWord = '') {
     if (!searchWord) searchWord = document.querySelector('[name=sort-txt]').value
     if (!searchWord) return
@@ -95,13 +107,35 @@ function onSelectImg(imgId) {
     renderCanvas()
 
     //Default Prefs
-    document.querySelector('.color').value = 'black'
+    document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
     document.querySelector('.font-selector').value = 'Impact'
 
 
     hideGallery()
     showGenerator()
+}
+
+function onSelectMeme(memeId) {
+    let meme = getMemeById(memeId)
+    gMeme = meme
+    updateMemeImg(meme.selectedImgId)
+    renderCanvas()
+
+    document.querySelector('.color').value = '#000000'
+    document.querySelector('.stroke-color').value = '#ffffff'
+    document.querySelector('.font-selector').value = 'Impact'
+
+    hideGallery()
+    showGenerator()
+}
+
+function getMemeById(memeId) {
+    let memes = loadFromStorage(KEY)
+    var meme = memes.find(function(meme) {
+        return memeId === meme.id
+    })
+    return meme
 }
 
 
@@ -273,7 +307,6 @@ function onAboutMe() {
 
     hideGenerator()
     hideGallery()
-    hideMyMemes()
     showAboutMe()
 }
 
@@ -286,30 +319,22 @@ function onShowGallery() {
 
     hideAboutMe()
     hideGenerator()
-    hideMyMemes()
     showGallery()
 }
 
 function onShowMemes() {
     removeActive()
     document.querySelector('.memes-btn').classList.add('active')
+    renderMemes()
 
     hideAboutMe()
     hideGenerator()
-    hideGallery()
-    showMyMemes()
-}
-
-function hideMyMemes() {
-    document.querySelector('.my-memes-gallery').style.display = 'none'
+    showGallery()
+    document.querySelector('.sort-container').style.display = 'none'
 }
 
 function hideAboutMe() {
     document.querySelector('.about-me').style.display = 'none'
-}
-
-function showMyMemes() {
-    document.querySelector('.my-memes-gallery').style.display = 'block'
 }
 
 function showAboutMe() {
