@@ -4,6 +4,7 @@ var gMeme
 var gMemes = []
 var gStartPos
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
+let gStickers = ['😎', '😭', '😍', '😂', '🤑', '🥳', '🤫']
 
 
 function setMemeDefault() {
@@ -252,4 +253,27 @@ function getEvPos(ev) {
         }
     }
     return pos
+}
+
+//Stickers
+var gCurrSticker = 0
+
+function renderStickers() {
+    let strHtml = ''
+    for (let i = gCurrSticker; i < (gCurrSticker + 4); i++) {
+        if (gStickers.length <= i) break
+        strHtml += `<button class="meme-btns meme-sticker-btns" onclick="onAddSticker('${gStickers[i]}')">${gStickers[i]}</button>`
+    }
+    document.querySelector('.curr-stickers').innerHTML = strHtml
+}
+
+function onNextStickers(val) {
+    if (val) {
+        if (gStickers.length < gCurrSticker + 4) return
+        gCurrSticker += 4
+    } else {
+        gCurrSticker -= 4
+        if (gCurrSticker < 0) gCurrSticker = 0
+    }
+    renderStickers()
 }

@@ -8,6 +8,7 @@ var gIsMore = false
 
 
 
+
 function init() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
@@ -110,8 +111,8 @@ function onSelectImg(imgId) {
     document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
     document.querySelector('.font-selector').value = 'Impact'
-
-
+        //////////CHECK
+    renderStickers()
     hideGallery()
     showGenerator()
 }
@@ -201,6 +202,11 @@ function onAlignRight() {
 function onNewLine() {
     addNewLine('new Text')
     renderLinePref()
+    render()
+}
+
+function onAddSticker(sticker) {
+    addNewLine(sticker)
     render()
 }
 

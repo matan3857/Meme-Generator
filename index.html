@@ -80,7 +80,13 @@
                 <button class="meme-btns font-plus" onclick="onPlus()"><img src="img/ICONS/increase font - icon.png"/></button>
                 <button class="meme-btns font-minus" onclick="onMinus()"><img src="img/ICONS/decrease font - icon.png"/></button>
 
+                <div class="meme-stickers flex">
+                    <button class="meme-btns stickers-left" onclick="onNextStickers(0)"><img src="img/ICONS/left-arrow.png"/></button>
+                    <div class="curr-stickers">
 
+                    </div>
+                    <button class="meme-btns stickers-right" onclick="onNextStickers(1)"><img src="img/ICONS/right-arrow.png"/></button>
+                </div>
                 <a class="meme-btns download-btn" href="#" onclick="onDownloadCanvas(this)" download="myMeme">Download</a>
                 <button class="meme-btns save-btn" onclick="onSaveMeme()"><img src="img/ICONS/save-solid.svg"/></button>
                 <a class="meme-btns share-btn" href="#" onclick="onDownloadCanvas(this)" download="myMeme">Share on FB</a>
