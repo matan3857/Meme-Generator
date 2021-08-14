@@ -374,6 +374,17 @@ canvas {
     margin: 0 auto;
 }
 
+.file-input-btn {
+    visibility: hidden;
+}
+
+.upload-img {
+    width: 150px;
+    height: 150px;
+    margin-block-start: 35px;
+    margin-inline-start: 45px;
+}
+
 
 /* SAVED MEMES GALLERY */
 

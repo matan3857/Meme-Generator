@@ -48,7 +48,13 @@ function renderGallery(imgs = '') {
     let strHtml = ''
     if (!imgs) {
         imgs = getImgs()
-        strHtml = `<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />`
+            // strHtml = `<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />`
+        strHtml = `<div flex>
+        <label for="upload-img">
+            <img class="upload-img pointer" src="img/ICONS//upload.png"/>
+        </label>
+        <input type="file" id="upload-img" class="file-input-btn" name="image" onchange="onImgInput(event)" />
+        </div>`
     }
 
     //let strHtml = `<img onclick="onImgInput(ev)" class="img-meme" src="img/ICONS/decrease font - icon.png" alt="" width="250" height="250"/>`
@@ -151,6 +157,9 @@ function getMemeById(memeId) {
 function renderCanvas() {
     if (gIsUploadImg) {
         renderImg(gUploadImg)
+            //CHECK
+        gCanvas.height = gUploadImg.height
+        gCanvas.width = gUploadImg.width
         let lines = getLines()
         lines.forEach(function(line, lineIdx) {
             drawText(line.txt, line.pos.x, line.pos.y, lineIdx)
@@ -159,7 +168,14 @@ function renderCanvas() {
         let img = new Image()
         let imgId = getImgId();
         img.src = getImgById(+imgId).url
+            //CHECK
+        gCanvas.height = img.height
+        gCanvas.width = img.width
         img.onload = () => {
+            // let scale = Math.min(gCanvas.width / img.width, gCanvas.height / img.height);
+            // gCanvas.width = img.width * scale
+            // gCanvas.height = img.height * scale
+
             gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
             let lines = getLines()
             lines.forEach(function(line, lineIdx) {
@@ -167,7 +183,6 @@ function renderCanvas() {
             });
         }
     }
-
 }
 
 function drawRect(x, y, txtHeight, textLength) {

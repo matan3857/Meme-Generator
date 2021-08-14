@@ -52,10 +52,8 @@ function alignCenter() {
 
 function alignRight() {
     let textLength = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
-    console.log('textLength', textLength)
     let pos = gCanvas.width - textLength
     gMeme.lines[gMeme.selectedLineIdx].pos.x = pos;
-
 }
 
 
