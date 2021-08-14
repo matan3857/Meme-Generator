@@ -1,10 +1,10 @@
 'use strict'
 
-var gCanvas;
-var gCanvasWidth
-var gCtx;
-var gInput
-var gIsMore = false
+let gCanvas;
+let gCanvasWidth
+let gCtx;
+let gInput
+let gIsMore = false
 let gIsUploadImg = false
 let gUploadImg
 
@@ -63,8 +63,7 @@ function renderGallery(imgs = '') {
 }
 
 function renderMemes() {
-    var memes = loadFromStorage(KEY)
-    console.log(memes)
+    let memes = loadFromStorage(KEY)
 
     let strHtmls = memes.map(function(meme) {
         return `
@@ -141,7 +140,7 @@ function onSelectMeme(memeId) {
 
 function getMemeById(memeId) {
     let memes = loadFromStorage(KEY)
-    var meme = memes.find(function(meme) {
+    let meme = memes.find(function(meme) {
         return memeId === meme.id
     })
     return meme
@@ -150,8 +149,6 @@ function getMemeById(memeId) {
 
 
 function renderCanvas() {
-    console.log(gIsUploadImg)
-    console.log(gUploadImg)
     if (gIsUploadImg) {
         renderImg(gUploadImg)
         let lines = getLines()
@@ -369,7 +366,7 @@ function showAboutMe() {
 }
 
 function removeActive() {
-    var elems = document.querySelectorAll(".active");
+    let elems = document.querySelectorAll(".active");
     [].forEach.call(elems, function(el) {
         el.classList.remove("active");
     });
@@ -392,7 +389,7 @@ function onImgInput(ev) {
 }
 
 function loadImageFromInput(ev, onImageReady) {
-    var reader = new FileReader()
+    let reader = new FileReader()
 
     reader.onload = function(event) {
         gUploadImg = new Image()
