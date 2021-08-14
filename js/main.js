@@ -9,8 +9,6 @@ let gIsUploadImg = false
 let gUploadImg
 
 
-
-
 function init() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
@@ -48,16 +46,14 @@ function renderGallery(imgs = '') {
     let strHtml = ''
     if (!imgs) {
         imgs = getImgs()
-            // strHtml = `<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />`
         strHtml = `<div flex>
-        <label for="upload-img">
-            <img class="upload-img pointer" src="img/ICONS//upload.png"/>
-        </label>
-        <input type="file" id="upload-img" class="file-input-btn" name="image" onchange="onImgInput(event)" />
+            <label for="upload-img">
+                <img class="upload-img pointer" src="img/ICONS//upload.png"/>
+            </label>
+            <input type="file" id="upload-img" class="file-input-btn" name="image" onchange="onImgInput(event)" />
         </div>`
     }
 
-    //let strHtml = `<img onclick="onImgInput(ev)" class="img-meme" src="img/ICONS/decrease font - icon.png" alt="" width="250" height="250"/>`
     let strHtmls = imgs.map(function(img) {
         return `
         <img onclick="onSelectImg('${img.id}')" class="img-meme" src="${img.url}" alt="" width="250" height="250" />
@@ -70,6 +66,10 @@ function renderGallery(imgs = '') {
 
 function renderMemes() {
     let memes = loadFromStorage(KEY)
+    if (!memes) {
+        document.querySelector('.gallery').innerHTML = `<h1>You don't have memes yet...</h1>`
+        return
+    }
 
     let strHtmls = memes.map(function(meme) {
         return `
@@ -112,8 +112,6 @@ function onRenderKeywords(isMore = false) {
     document.querySelector('.btns-search').innerHTML = strHtml
 }
 
-
-
 function onSelectImg(imgId) {
     gIsUploadImg = false
     setMemeDefault()
@@ -152,14 +150,13 @@ function getMemeById(memeId) {
     return meme
 }
 
-
-
 function renderCanvas() {
     if (gIsUploadImg) {
         renderImg(gUploadImg)
             //CHECK
-        gCanvas.height = gUploadImg.height
-        gCanvas.width = gUploadImg.width
+            //gCanvas.height = gUploadImg.height
+            //gCanvas.width = gUploadImg.width
+
         let lines = getLines()
         lines.forEach(function(line, lineIdx) {
             drawText(line.txt, line.pos.x, line.pos.y, lineIdx)
@@ -169,8 +166,8 @@ function renderCanvas() {
         let imgId = getImgId();
         img.src = getImgById(+imgId).url
             //CHECK
-        gCanvas.height = img.height
-        gCanvas.width = img.width
+            //gCanvas.height = img.height
+            //gCanvas.width = img.width
         img.onload = () => {
             // let scale = Math.min(gCanvas.width / img.width, gCanvas.height / img.height);
             // gCanvas.width = img.width * scale
@@ -192,10 +189,8 @@ function drawRect(x, y, txtHeight, textLength) {
     gCtx.stroke()
 }
 
-
 function drawText(txt, x, y, lineIdx) {
     let currLine = getCurrLineIdx()
-
     gCtx.lineWidth = 2
     gCtx.strokeStyle = getStrokeColor(lineIdx);
     gCtx.fillStyle = getColor(lineIdx)
@@ -240,7 +235,6 @@ function onAddSticker(sticker) {
     addNewLine(sticker)
     render()
 }
-
 
 function onText() {
     addLine(gInput.value)
@@ -338,7 +332,6 @@ function renderLinePref() {
     document.querySelector('[name=txt]').value = currLine.txt
 }
 
-
 function onAboutMe() {
     removeActive()
     document.querySelector('.about-me-btn').classList.add('active')
@@ -347,8 +340,6 @@ function onAboutMe() {
     hideGallery()
     showAboutMe()
 }
-
-
 
 function onShowGallery() {
     removeActive()
@@ -391,7 +382,6 @@ function removeActive() {
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
 }
-
 
 function onImgInput(ev) {
     setMemeDefault()
