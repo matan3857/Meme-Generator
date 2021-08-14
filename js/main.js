@@ -5,6 +5,8 @@ var gCanvasWidth
 var gCtx;
 var gInput
 var gIsMore = false
+let gIsUploadImg = false
+let gUploadImg
 
 
 
@@ -108,6 +110,7 @@ function onRenderKeywords(isMore = false) {
 
 
 function onSelectImg(imgId) {
+    gIsUploadImg = false
     setMemeDefault()
     updateMemeImg(imgId);
     renderCanvas()
@@ -116,7 +119,7 @@ function onSelectImg(imgId) {
     document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
     document.querySelector('.font-selector').value = 'Impact'
-        //////////CHECK
+
     renderStickers()
     hideGallery()
     showGenerator()
@@ -145,16 +148,27 @@ function getMemeById(memeId) {
 }
 
 
+
 function renderCanvas() {
-    let img = new Image()
-    let imgId = getImgId();
-    img.src = getImgById(+imgId).url
-    img.onload = () => {
-        gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
-        let lines = getLines();
+    console.log(gIsUploadImg)
+    console.log(gUploadImg)
+    if (gIsUploadImg) {
+        renderImg(gUploadImg)
+        let lines = getLines()
         lines.forEach(function(line, lineIdx) {
             drawText(line.txt, line.pos.x, line.pos.y, lineIdx)
         });
+    } else {
+        let img = new Image()
+        let imgId = getImgId();
+        img.src = getImgById(+imgId).url
+        img.onload = () => {
+            gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+            let lines = getLines()
+            lines.forEach(function(line, lineIdx) {
+                drawText(line.txt, line.pos.x, line.pos.y, lineIdx)
+            });
+        }
     }
 
 }
@@ -367,25 +381,23 @@ function toggleMenu() {
 }
 
 
-// IMAGE UPLOADING NEED TO FIX
 function onImgInput(ev) {
+    setMemeDefault()
+    gIsUploadImg = true
     loadImageFromInput(ev, renderImg)
 
-    setMemeDefault()
     renderStickers()
-
     hideGallery()
     showGenerator()
-
 }
 
 function loadImageFromInput(ev, onImageReady) {
     var reader = new FileReader()
 
     reader.onload = function(event) {
-        var img = new Image()
-        img.onload = onImageReady.bind(null, img)
-        img.src = event.target.result
+        gUploadImg = new Image()
+        gUploadImg.onload = onImageReady.bind(null, gUploadImg)
+        gUploadImg.src = event.target.result
     }
     reader.readAsDataURL(ev.target.files[0])
 }
