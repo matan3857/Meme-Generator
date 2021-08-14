@@ -293,7 +293,16 @@ function onChangeFont(font) {
 
 function onSaveMeme() {
     saveMeme()
-    alert('Saved')
+    toggleModal()
+}
+
+function toggleModal() {
+    document.querySelector('.modal').style.display = 'block'
+}
+
+function onCloseModal() {
+    document.querySelector('.modal').style.display = 'none'
+
 }
 
 
