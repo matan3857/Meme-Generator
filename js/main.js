@@ -43,15 +43,20 @@ function resizeCanvas() {
 }
 
 function renderGallery(imgs = '') {
+    let strHtml = ''
     if (!imgs) {
         imgs = getImgs()
+        strHtml = `<input type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />`
     }
+
+    //let strHtml = `<img onclick="onImgInput(ev)" class="img-meme" src="img/ICONS/decrease font - icon.png" alt="" width="250" height="250"/>`
     let strHtmls = imgs.map(function(img) {
         return `
         <img onclick="onSelectImg('${img.id}')" class="img-meme" src="${img.url}" alt="" width="250" height="250" />
         `
     })
-    document.querySelector('.gallery').innerHTML = strHtmls.join('')
+    strHtml += strHtmls.join('')
+    document.querySelector('.gallery').innerHTML = strHtml
     onRenderKeywords()
 }
 
@@ -294,6 +299,7 @@ function onBackToGal() {
 }
 
 function onDownloadCanvas(elLink) {
+    //NEED TO FIX
     const data = gCanvas.toDataURL()
     elLink.href = data
 }
@@ -358,4 +364,32 @@ function removeActive() {
 
 function toggleMenu() {
     document.body.classList.toggle('menu-open');
+}
+
+
+// IMAGE UPLOADING NEED TO FIX
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+
+    setMemeDefault()
+    renderStickers()
+
+    hideGallery()
+    showGenerator()
+
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    var reader = new FileReader()
+
+    reader.onload = function(event) {
+        var img = new Image()
+        img.onload = onImageReady.bind(null, img)
+        img.src = event.target.result
+    }
+    reader.readAsDataURL(ev.target.files[0])
+}
+
+function renderImg(img) {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
 }

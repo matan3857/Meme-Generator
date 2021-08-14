@@ -1,36 +1,20 @@
 'use strict'
 const KEY = 'memeDB';
-var gMeme
-var gMemes = []
-var gStartPos
+let gMeme
+let gMemes = []
+let gStartPos
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 let gStickers = ['😎', '😭', '😍', '😂', '🤑', '🥳', '🤫']
+let gCurrSticker = 0
+
+//gCanvas.toDataURL('image/jpeg', 0.5)
 
 
 function setMemeDefault() {
     gMeme = {
         id: makeId(),
         selectedLineIdx: 0,
-        lines: [
-            // {
-            //     pos: { x: 50, y: 50 },
-            //     txt: 'I never eat Falafel',
-            //     size: 20,
-            //     align: 'left',
-            //     color: '#FF1010',
-            //     strokeColor: '#101010',
-            //     font: 'Impact'
-            // },
-            // {
-            //     pos: { x: 50, y: 150 },
-            //     txt: 'I never eat Shawarma',
-            //     size: 50,
-            //     align: 'left',
-            //     color: '#1010FF',
-            //     strokeColor: '#101010',
-            //     font: 'Impact'
-            // }
-        ]
+        lines: []
     }
 }
 
@@ -167,9 +151,12 @@ function setColorStroke(color) {
 function changeFont(newFont) {
     gMeme.lines[gMeme.selectedLineIdx].font = newFont
 }
+
 //For my memes saving
 function saveMeme() {
     gMeme.img = gCanvas.toDataURL()
+        // Make new id if we have same imgs
+    gMeme.id = makeId()
     gMemes.push(JSON.parse(JSON.stringify(gMeme)))
     _saveMemesToStorage()
 }
@@ -196,7 +183,8 @@ function onGrabDown(ev) {
     if (!isLineClicked(pos)) return
     setLineDrag(true)
     gStartPos = pos
-    document.body.style.cursor = 'grabbing'
+    let elCanvas = document.querySelector('.meme-container')
+    elCanvas.style.cursor = 'grabbing'
 }
 
 function isLineClicked(clickedPos) {
@@ -231,7 +219,8 @@ function moveMeme(dx, dy) {
 
 function onGrabUp() {
     setLineDrag(false)
-    document.body.style.cursor = 'grab'
+    let elCanvas = document.querySelector('.meme-container')
+    elCanvas.style.cursor = 'grab'
 }
 
 function moveCurrLine(dx, dy) {
@@ -256,7 +245,6 @@ function getEvPos(ev) {
 }
 
 //Stickers
-var gCurrSticker = 0
 
 function renderStickers() {
     let strHtml = ''
