@@ -84,6 +84,7 @@ function onSelectMeme(memeId) {
     gMeme = meme
     updateMemeImg(meme.selectedImgId)
     renderCanvas()
+    renderStickers()
 
     document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
