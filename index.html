@@ -68,14 +68,14 @@
                 <button class="meme-btns delete-btn" onclick="onDeleteLine()"><img src="img/ICONS/trash.png"/></button>
 
                 <select class="font-selector" onchange="onChangeFont(this.value)">
-        <option value="Impact">Impact</option>
-        <option value="monospace">Monospace</option>
-        <option value="Arial">Arial</option>
-        <option value="sarif">Sarif</option>
+        <option value="Impact" style="font-family:Impact">Impact</option>
+        <option value="monospace" style="font-family:Monospace">Monospace</option>
+        <option value="Arial" style="font-family:Arial">Arial</option>
+        <option value="sarif" style="font-family:Sarif">Sarif</option>
     </select>
                 <button class="meme-btns color-btn"><img src="img/ICONS/paint-board-and-brush.png"/>
                     <input class="color" value="#000000" type="color" onchange="onSetColorFill(this.value)" /></button>
-                <button class="meme-btns stroke-btn"><img src="img/ICONS/text stroke.png"/>
+                <button for="stroke-color" class="meme-btns stroke-btn"><img src="img/ICONS/text stroke.png"/>
                     <input class="stroke-color" type="color" onchange="onSetColorStroke(this.value)" value="#ffffff" /></button>
                 <button class="meme-btns btns-move btn-up" onclick="onUp()"><img src="img/ICONS/arrows/up-arrow.png"/></button>
                 <button class="meme-btns btns-move btn-down" onclick="onDown()"><img src="img/ICONS/arrows/down-arrow.png"/></button>

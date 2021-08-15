@@ -7,6 +7,8 @@ let gInput
 let gIsMore = false
 let gIsUploadImg = false
 let gUploadImg
+let gIsDownload = false
+
 
 
 function init() {
@@ -43,15 +45,14 @@ function resizeCanvas() {
 }
 
 function renderGallery(imgs = '') {
-    let strHtml = ''
+    let strHtml = `<div class="upload-container">
+    <label for="upload-img">
+        <img class="upload-img pointer" src="img/ICONS//upload.png"/>
+    </label>
+    <input type="file" id="upload-img" class="file-input-btn" name="image" onchange="onImgInput(event)" />
+</div>`
     if (!imgs) {
         imgs = getImgs()
-        strHtml = `<div flex>
-            <label for="upload-img">
-                <img class="upload-img pointer" src="img/ICONS//upload.png"/>
-            </label>
-            <input type="file" id="upload-img" class="file-input-btn" name="image" onchange="onImgInput(event)" />
-        </div>`
     }
 
     let strHtmls = imgs.map(function(img) {
@@ -122,6 +123,7 @@ function onSelectImg(imgId) {
     document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
     document.querySelector('.font-selector').value = 'Impact'
+    document.querySelector('.font-selector').style.fontFamily = 'Impact'
 
     renderStickers()
     hideGallery()
@@ -137,6 +139,7 @@ function onSelectMeme(memeId) {
     document.querySelector('.color').value = '#000000'
     document.querySelector('.stroke-color').value = '#ffffff'
     document.querySelector('.font-selector').value = 'Impact'
+    document.querySelector('.font-selector').style.fontFamily = 'Impact'
 
     hideGallery()
     showGenerator()
@@ -190,6 +193,7 @@ function drawRect(x, y, txtHeight, textLength) {
 }
 
 function drawText(txt, x, y, lineIdx) {
+    console.log('im')
     let currLine = getCurrLineIdx()
     gCtx.lineWidth = 2
     gCtx.strokeStyle = getStrokeColor(lineIdx);
@@ -198,7 +202,7 @@ function drawText(txt, x, y, lineIdx) {
     gCtx.fillText(txt, x, y);
     gCtx.strokeText(txt, x, y)
     gCtx.save();
-    if (lineIdx === currLine) {
+    if (!gIsDownload && lineIdx === currLine) {
         let pos = getCurrLinePos(lineIdx)
         let textLength = gCtx.measureText(txt).width
         drawRect(pos.x, pos.y, pos.size, textLength)
@@ -305,7 +309,6 @@ function onCloseModal() {
 
 }
 
-
 function render() {
     clearCanvas()
     renderCanvas()
@@ -327,10 +330,23 @@ function onBackToGal() {
     hideGenerator();
 }
 
+
 function onDownloadCanvas(elLink) {
-    //NEED TO FIX
+    gIsDownload = true
+
+    //Draw without lines around
+    let img = new Image()
+    let imgId = getImgId();
+    img.src = getImgById(+imgId).url
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height)
+    let lines = getLines()
+    lines.forEach(function(line, lineIdx) {
+        drawText(line.txt, line.pos.x, line.pos.y, lineIdx)
+    });
+
     const data = gCanvas.toDataURL()
     elLink.href = data
+    gIsDownload = false
 }
 
 function renderLinePref() {
