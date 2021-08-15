@@ -1,7 +1,8 @@
-@import './header.css';
-@import './helper.css';
-@import './generator.css';
-@import './about-me.css';
+@import '../css/header.css';
+@import '../css/helper.css';
+@import '../css/generator.css';
+@import '../css/about-me.css';
+@import '../css/gallery.css';
 * {
     box-sizing: border-box;
 }
@@ -114,42 +115,6 @@ body {
 }
 
 
-/* GALLERY */
-
-.gallery-container {
-    margin-top: 1rem;
-}
-
-.gallery {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    justify-items: center;
-    margin: 0 auto;
-}
-
-.file-input-btn {
-    visibility: hidden;
-    width: 0;
-}
-
-.upload-img {
-    width: 150px;
-    height: 150px;
-}
-
-.upload-container {
-    align-self: center;
-}
-
-
-/* SAVED MEMES GALLERY */
-
-.my-memes-gallery {
-    display: none;
-}
-
-
 /* MODAL */
 
 .modal {
@@ -184,7 +149,7 @@ body {
 }
 
 
-/* The Close Button */
+/* The Close Button - Modal */
 
 .close {
     color: white;

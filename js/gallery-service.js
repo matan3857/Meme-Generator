@@ -1,5 +1,6 @@
 'use strict'
 var gKeywords = { 'happy': 25, 'baby': 13, 'funny': 7, 'dog': 6, 'crazy': 12, 'kiss': 3, 'cat': 3, 'putin': 2 }
+let gUploadImg
 
 var gImages = [
     { id: 1, url: 'img/1.jpg', keywords: ['trump'] },
@@ -70,4 +71,19 @@ function getImgById(imgId) {
         return imgId === img.id
     })
     return img
+}
+
+function renderImg(img) {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    let reader = new FileReader()
+
+    reader.onload = function(event) {
+        gUploadImg = new Image()
+        gUploadImg.onload = onImageReady.bind(null, gUploadImg)
+        gUploadImg.src = event.target.result
+    }
+    reader.readAsDataURL(ev.target.files[0])
 }

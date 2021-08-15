@@ -1,14 +1,24 @@
 'use strict'
 const KEY = 'memeDB';
 let gMeme
-let gMemes = []
+let gMemes = loadFromStorage(KEY) ? loadFromStorage(KEY) : []
 let gStartPos
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 let gStickers = ['😎', '😭', '😍', '😂', '🤑', '🥳', '🤫']
 let gCurrSticker = 0
 
-//gCanvas.toDataURL('image/jpeg', 0.5)
-
+function makeLine(txt) {
+    return {
+        pos: { x: 175, y: 250 },
+        txt,
+        size: 40,
+        align: 'left',
+        color: '#FFFFFF',
+        strokeColor: '#000000',
+        font: 'Impact',
+        isDrag: false
+    }
+}
 
 function setMemeDefault() {
     gMeme = {
@@ -16,6 +26,14 @@ function setMemeDefault() {
         selectedLineIdx: 0,
         lines: []
     }
+}
+
+function renderLinePref() {
+    let currLine = getCurrLine()
+    document.querySelector('.color').value = currLine.color
+    document.querySelector('.stroke-color').value = currLine.strokeColor
+    document.querySelector('.font-selector').value = currLine.font
+    document.querySelector('[name=txt]').value = currLine.txt
 }
 
 function getCurrLineIdx() {
@@ -34,11 +52,22 @@ function getCurrLinePos(lineIdx) {
 }
 
 
+function getMemeById(memeId) {
+    let memes = loadFromStorage(KEY)
+    let meme = memes.find(function(meme) {
+        return memeId === meme.id
+    })
+    return meme
+}
 
 function switchLines() {
     if (gMeme.selectedLineIdx === gMeme.lines.length - 1) gMeme.selectedLineIdx = 0
     else gMeme.selectedLineIdx++
 
+}
+
+function updateMemeImg(imgId) {
+    gMeme.selectedImgId = imgId
 }
 
 function alignLeft() {
@@ -54,11 +83,6 @@ function alignRight() {
     let textLength = gCtx.measureText(gMeme.lines[gMeme.selectedLineIdx].txt).width
     let pos = gCanvas.width - textLength
     gMeme.lines[gMeme.selectedLineIdx].pos.x = pos;
-}
-
-
-function updateMemeImg(imgId) {
-    gMeme.selectedImgId = imgId
 }
 
 function getImgId() {
@@ -94,20 +118,6 @@ function addLine(txt) {
     if (!gMeme.lines.length) return
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
-
-function makeLine(txt) {
-    return {
-        pos: { x: 175, y: 250 },
-        txt,
-        size: 40,
-        align: 'left',
-        color: '#FFFFFF',
-        strokeColor: '#000000',
-        font: 'Impact',
-        isDrag: false
-    }
-}
-
 
 function getLineDown() {
     gMeme.lines[gMeme.selectedLineIdx].pos.y += 10
@@ -164,18 +174,6 @@ function _saveMemesToStorage() {
 }
 
 //Grab Lines on Canvas functions
-function addMouseListeners() {
-    gCanvas.addEventListener('mousemove', onGrabMove)
-    gCanvas.addEventListener('mousedown', onGrabDown)
-    gCanvas.addEventListener('mouseup', onGrabUp)
-}
-
-function addTouchListeners() {
-    gCanvas.addEventListener('touchmove', onGrabMove)
-    gCanvas.addEventListener('touchstart', onGrabDown)
-    gCanvas.addEventListener('touchend', onGrabUp)
-}
-
 function onGrabDown(ev) {
     const pos = getEvPos(ev)
     if (!isLineClicked(pos)) return
@@ -207,12 +205,6 @@ function onGrabMove(ev) {
         gStartPos = pos
         renderCanvas()
     }
-}
-
-function moveMeme(dx, dy) {
-    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
-    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
-
 }
 
 function onGrabUp() {
